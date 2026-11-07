@@ -1,0 +1,44 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}SOS Campo Grande{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{% static 'ocorrencias/style.css' %}">
+</head>
+<body>
+
+<header class="site-header">
+    <nav class="navbar container">
+        <a href="{% url 'ocorrencias:home' %}" class="brand">
+            <span class="brand-dot"></span>
+            SOS Campo Grande
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'ocorrencias:home' %}">Início</a>
+            <a href="{% url 'ocorrencias:listar' %}">Ocorrências</a>
+            <a href="{% url 'ocorrencias:cadastrar' %}">Registrar</a>
+            <a href="{% url 'ocorrencias:painel' %}">Painel</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container main-content">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        SOS Campo Grande — Cidades inteligentes e sustentabilidade
+    </div>
+</footer>
+
+</body>
+</html>

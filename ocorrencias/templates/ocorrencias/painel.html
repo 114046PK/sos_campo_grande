@@ -1,0 +1,85 @@
+
+{% extends 'ocorrencias/base.html' %}
+
+{% block title %}Painel | SOS Campo Grande{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <span class="eyebrow">INDICADORES DA CIDADE</span>
+    <h1 class="page-title">Painel de ocorrências</h1>
+
+    <p>
+        Acompanhe os problemas urbanos registrados
+        na plataforma.
+    </p>
+</section>
+
+<section class="section">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <strong>{{ total }}</strong>
+            <span>Total de ocorrências</span>
+        </div>
+
+        <div class="stat-card">
+            <strong>{{ pendentes }}</strong>
+            <span>Pendentes</span>
+        </div>
+
+        <div class="stat-card">
+            <strong>{{ resolvidas }}</strong>
+            <span>Resolvidas</span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="panel-card">
+        <h2 class="section-title">Em andamento</h2>
+        <p>
+            <strong>{{ andamento }}</strong>
+            ocorrência(s) em andamento.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <h2 class="section-title">Últimos registros</h2>
+
+        <a href="{% url 'ocorrencias:listar' %}"
+           class="text-link">
+            Ver todas
+        </a>
+    </div>
+
+    <div class="occurrences-grid">
+        {% for ocorrencia in recentes %}
+            <article class="occurrence-card">
+                <p class="occurrence-meta">
+                    {{ ocorrencia.get_categoria_display }}
+                    • {{ ocorrencia.bairro }}
+                </p>
+
+                <h3>{{ ocorrencia.titulo }}</h3>
+
+                <p class="occurrence-description">
+                    {{ ocorrencia.descricao|truncatechars:100 }}
+                </p>
+
+                <div class="occurrence-footer">
+                    <span class="status status-{{ ocorrencia.status }}">
+                        {{ ocorrencia.get_status_display }}
+                    </span>
+                </div>
+            </article>
+        {% empty %}
+            <div class="empty-state">
+                Nenhuma ocorrência cadastrada.
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+
+{% extends 'ocorrencias/base.html' %}
+
+{% block title %}Registrar | SOS Campo Grande{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+    <span class="eyebrow">PARTICIPE DA MUDANÇA</span>
+
+    <h1>Registrar ocorrência</h1>
+
+    <p>
+        Encontrou algum problema em Campo Grande?
+        Preencha as informações abaixo.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ formulario.as_p }}
+
+        <button type="submit" class="btn btn-primary">
+            Enviar ocorrência
+        </button>
+    </form>
+</div>
+
+{% endblock %}

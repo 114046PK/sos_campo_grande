@@ -1,0 +1,80 @@
+
+{% extends 'ocorrencias/base.html' %}
+
+{% block title %}Ocorrências | SOS Campo Grande{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <span class="eyebrow">ACOMPANHE A CIDADE</span>
+    <h1 class="page-title">Ocorrências registradas</h1>
+
+    <p>
+        Consulte os problemas relatados pelos moradores.
+    </p>
+
+    <form method="GET" class="filters">
+        <select name="categoria">
+            <option value="">Todas as categorias</option>
+
+            {% for valor, nome in categorias %}
+                <option value="{{ valor }}"
+                    {% if categoria_selecionada == valor %}
+                        selected
+                    {% endif %}>
+                    {{ nome }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select name="status">
+            <option value="">Todos os status</option>
+
+            {% for valor, nome in status_opcoes %}
+                <option value="{{ valor }}"
+                    {% if status_selecionado == valor %}
+                        selected
+                    {% endif %}>
+                    {{ nome }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-primary">
+            Filtrar
+        </button>
+    </form>
+
+    <div class="occurrences-grid">
+        {% for ocorrencia in ocorrencias %}
+            <article class="occurrence-card">
+                <p class="occurrence-meta">
+                    {{ ocorrencia.get_categoria_display }}
+                    • {{ ocorrencia.bairro }}
+                </p>
+
+                <h3>{{ ocorrencia.titulo }}</h3>
+
+                <p class="occurrence-description">
+                    {{ ocorrencia.descricao }}
+                </p>
+
+                <div class="occurrence-footer">
+                    <span class="status status-{{ ocorrencia.status }}">
+                        {{ ocorrencia.get_status_display }}
+                    </span>
+
+                    <small>
+                        {{ ocorrencia.data_criacao|date:"d/m/Y" }}
+                    </small>
+                </div>
+            </article>
+        {% empty %}
+            <div class="empty-state">
+                Nenhuma ocorrência encontrada.
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

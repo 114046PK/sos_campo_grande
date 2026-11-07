@@ -1,0 +1,101 @@
+
+{% extends 'ocorrencias/base.html' %}
+
+{% block title %}Início | SOS Campo Grande{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <span class="eyebrow">
+        CIDADES INTELIGENTES E SUSTENTABILIDADE
+    </span>
+
+    <h1>
+        Uma cidade melhor começa com a
+        participação de todos.
+    </h1>
+
+    <p>
+        Registre problemas urbanos, acompanhe ocorrências
+        e ajude a visualizar as necessidades dos bairros
+        de Campo Grande.
+    </p>
+
+    <div class="hero-actions">
+        <a href="{% url 'ocorrencias:cadastrar' %}"
+           class="btn btn-primary">
+            Registrar ocorrência
+        </a>
+
+        <a href="{% url 'ocorrencias:listar' %}"
+           class="btn btn-outline">
+            Ver ocorrências
+        </a>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Visão geral</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <strong>{{ total }}</strong>
+            <span>Ocorrências registradas</span>
+        </div>
+
+        <div class="stat-card">
+            <strong>{{ pendentes }}</strong>
+            <span>Pendentes</span>
+        </div>
+
+        <div class="stat-card">
+            <strong>{{ resolvidas }}</strong>
+            <span>Resolvidas</span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <h2 class="section-title">Ocorrências recentes</h2>
+
+        <a href="{% url 'ocorrencias:listar' %}"
+           class="text-link">
+            Ver todas
+        </a>
+    </div>
+
+    <div class="occurrences-grid">
+        {% for ocorrencia in recentes %}
+            <article class="occurrence-card">
+                <p class="occurrence-meta">
+                    {{ ocorrencia.get_categoria_display }}
+                    <span>•</span>
+                    {{ ocorrencia.bairro }}
+                </p>
+
+                <h3>{{ ocorrencia.titulo }}</h3>
+
+                <p class="occurrence-description">
+                    {{ ocorrencia.descricao|truncatechars:120 }}
+                </p>
+
+                <div class="occurrence-footer">
+                    <span class="status status-{{ ocorrencia.status }}">
+                        {{ ocorrencia.get_status_display }}
+                    </span>
+
+                    <small>
+                        {{ ocorrencia.data_criacao|date:"d/m/Y" }}
+                    </small>
+                </div>
+            </article>
+        {% empty %}
+            <div class="empty-state">
+                Ainda não existem ocorrências registradas.
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
