@@ -84,84 +84,122 @@ soscg/
 └── README.md
 ```
 
-##  Como executar o projeto
+Como executar o projeto
 
-### Pré-requisitos
+Pré-requisitos
 
-- Python instalado
-- Git instalado
-- Editor de código, como VS Code
+Antes de começar, tenha instalado:
 
-### 1. Clonar o repositório
+Python 3.12 ou superior, com versão compatível com as dependências do projeto
 
-```bash
-git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
-cd SEU-REPOSITORIO
-```
+Git
 
-Substitua `SEU-USUARIO` e `SEU-REPOSITORIO` pelos dados reais do GitHub.
+Um editor de código, como o Visual Studio Code
 
-### 2. Criar o ambiente virtual
+1. Clonar o repositório
 
-No Windows:
+Abra um terminal e execute:
 
-```powershell
+git clone https://github.com/114046PK/sos_campo_grande.git
+cd sos_campo_grande
+
+2. Criar o ambiente virtual
+
+No Windows (PowerShell):
+
 python -m venv .venv
-```
 
-### 3. Ativar o ambiente virtual
+3. Ativar o ambiente virtual
 
 No PowerShell:
 
-```powershell
 .\.venv\Scripts\Activate.ps1
-```
 
-### 4. Instalar as dependências
+Caso esteja usando CMD:
 
-```powershell
+.venv\Scripts\activate.bat
+
+No Linux ou macOS:
+
+source .venv/bin/activate
+
+4. Instalar as dependências
+
+Com o ambiente virtual ativado:
+
 python -m pip install -r requirements.txt
-```
 
-### 5. Aplicar as migrações
+5. Verificar as configurações
 
-```powershell
-python manage.py migrate
-```
-
-### 6. Iniciar o servidor
-
-```powershell
-python manage.py runserver
-```
-
-Acesse:
-
-**http://127.0.0.1:8000/**
-
-### 7. Criar um administrador (opcional)
-
-```powershell
-python manage.py createsuperuser
-```
-
-Depois, acesse:
-
-**http://127.0.0.1:8000/admin/**
-
-##  Testes
-
-Para verificar a configuração do projeto:
-
-```powershell
 python manage.py check
-```
+
+Se não houver problemas de configuração, continue.
+
+6. Preparar o banco de dados
+
+O projeto utiliza SQLite, portanto não é necessário instalar um servidor de banco de dados.
+
+Execute:
+
+python manage.py migrate
+
+Esse comando cria o banco de dados local e aplica as migrações versionadas no repositório.
+
+7. Criar um administrador (opcional)
+
+python manage.py createsuperuser
+
+Informe um nome de usuário e uma senha.
+
+8. Executar o projeto
+
+python manage.py runserver
+
+Abra o navegador:
+
+http://127.0.0.1:8000/
+
+9. Acessar as funcionalidades
+
+Página
+
+Endereço
+
+Início
+
+/
+
+Ocorrências
+
+/ocorrencias/
+
+Registrar ocorrência
+
+/cadastrar/
+
+Painel de indicadores
+
+/painel/
+
+Administração
+
+/admin/
+
+10. Executar os testes
 
 Para executar os testes automatizados:
 
-```powershell
 python manage.py test
-```
+
+Observações importantes
+
+O arquivo db.sqlite3 não é enviado ao GitHub. Ele é criado localmente ao executar as migrações.
+
+O ambiente virtual .venv também não é versionado.
+
+Execute os comandos na pasta que contém manage.py.
+
+A aplicação utiliza o servidor de desenvolvimento do Django. As configurações de produção exigem ajustes adicionais.
 
 ##  Banco de dados
 
